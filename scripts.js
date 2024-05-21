@@ -14,6 +14,7 @@ function multiply(num1,num2) {
 
 function divide(numerator, divisor) {
     if (divisor === 0){
+        isDivisionError = true;
         return "ERROR";
     } else return numerator/divisor;
 }
@@ -51,6 +52,25 @@ let isJustOperated = false;
 // since there are so many buttons, use event delegation
 const buttonArea = document.querySelector(".buttons");
 buttonArea.addEventListener("click", function(event) {
+    if (event.target.classList.contains("clear")){
+        displayString = "";
+        values = {
+            num1:null,
+            operator:null,
+            num2:null,
+        }
+        updateDisplay();
+        isOperatorSelected = false;
+        isDisplayEndWithNumber = false;
+        isDivisionError = false;
+        isNegativeSelected = false;
+        isJustOperated = false;
+        return;
+    }
+    if (isDivisionError){
+        alert("Please clear calculator of division error");
+        return;
+    }
     if (event.target.classList.contains("number")) {
         if (!isJustOperated){
             displayString = displayString.concat(event.target.innerText);
@@ -78,6 +98,7 @@ buttonArea.addEventListener("click", function(event) {
             isDisplayEndWithNumber = false;
             isNegativeSelected = false;
             isJustOperated = true;
+            isOperatorSelected = false;
             return;
         } 
         // if the display already holds 1 number and an operator
@@ -131,19 +152,6 @@ buttonArea.addEventListener("click", function(event) {
             isJustOperated = true;
             return;
         } else return;
-    } else if (event.target.classList.contains("clear")){
-        displayString = "";
-        values = {
-            num1:null,
-            operator:null,
-            num2:null,
-        }
-        updateDisplay();
-        isOperatorSelected = false;
-        isDisplayEndWithNumber = false;
-        isDivisionError = false;
-        isNegativeSelected = false;
-        isJustOperated = false;
     }
 })
 
