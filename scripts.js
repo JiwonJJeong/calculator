@@ -98,14 +98,14 @@ buttonArea.addEventListener("click", function(event) {
         }
         // only last case is if there is nothing in display,
             // only "-" operator will add "-" for neg sign
-        else {
-            if (event.target.classList.contains("subtract") && !isNegativeSelected){
-                displayString = displayString.concat("-");
-                updateDisplay();
-                isNegativeSelected = true;
-                return;
-            }
-        }
+        else if (event.target.classList.contains("subtract") && !isNegativeSelected){
+            displayString = displayString.concat("-");
+            updateDisplay();
+            isNegativeSelected = true;
+            return;
+        } else {
+            console.log("operator button error");
+        };
     } else if (event.target.classList.contains("equals")) {
         // if display holds 2 numbers and an operator
             // executes operation
