@@ -46,6 +46,13 @@ let displayString ="";
 const buttonArea = document.querySelector(".buttons");
 buttonArea.addEventListener("click", function(event) {
     if (event.target.classList.contains("number")) {
-        console.log(event.target.innerText);
+        displayString = displayString.concat(event.target.innerText);
+        updateDisplay();
+        console.log(displayString);
     }
 })
+
+function updateDisplay(){
+    const display = document.querySelector(".display-text");
+    display.textContent = displayString;
+}
