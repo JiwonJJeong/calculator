@@ -46,26 +46,38 @@ let isOperatorSelected = false;
 let isDisplayEndWithNumber = false;
 let isDivisionError = false;
 let isNegativeSelected = false;
+let isJustOperated = false;
 // assign button event listener that will populate displayString then update display
 // since there are so many buttons, use event delegation
 const buttonArea = document.querySelector(".buttons");
 buttonArea.addEventListener("click", function(event) {
     if (event.target.classList.contains("number")) {
-        displayString = displayString.concat(event.target.innerText);
-        updateDisplay();
-        isDisplayEndWithNumber = true;
-        console.log(displayString);
-        return;
+        if (!isJustOperated){
+            displayString = displayString.concat(event.target.innerText);
+            updateDisplay();
+            isDisplayEndWithNumber = true;
+            isJustOperated = false;
+            console.log(displayString);
+            return;
+        } else{
+            displayString = event.target.innerText;
+            updateDisplay();
+            isDisplayEndWithNumber = true;
+            isJustOperated = false;
+            console.log(displayString);
+            return;
+        }
     } else if (event.target.classList.contains("operator")) {
         // all operators must be surrounded by spaces for proper conversion from string to values
         // if the display already holds 2 numbers and an operator,
             // then execute first operation, display result & new operator
         if (isOperatorSelected && isDisplayEndWithNumber) {
-            displayString = toString(operate());
+            displayString = operate().toString();
             displayString = displayString.concat(" ",event.target.innerText," ");
             updateDisplay();
             isDisplayEndWithNumber = false;
             isNegativeSelected = false;
+            isJustOperated = true;
             return;
         } 
         // if the display already holds 1 number and an operator
@@ -79,11 +91,13 @@ buttonArea.addEventListener("click", function(event) {
                     displayString = displayString.concat("-");
                     updateDisplay();
                     isNegativeSelected = true;
+                    isJustOperated = false;
                     return;
             } else if (!isNegativeSelected) {
                 displayString = displayString.slice (0,-2);
                 displayString = displayString.concat(event.target.innerText," ");
                 updateDisplay();
+                isJustOperated = false;
                 return;
             } else return;
         } 
@@ -94,6 +108,7 @@ buttonArea.addEventListener("click", function(event) {
             updateDisplay();
             isOperatorSelected = true;
             isDisplayEndWithNumber = false;
+            isJustOperated = false;
             return;
         }
         // only last case is if there is nothing in display,
@@ -102,16 +117,18 @@ buttonArea.addEventListener("click", function(event) {
             displayString = displayString.concat("-");
             updateDisplay();
             isNegativeSelected = true;
+            isJustOperated = false;
             return;
         } else {
             console.log("operator button error");
         };
     } else if (event.target.classList.contains("equals")) {
         if (isOperatorSelected && isDisplayEndWithNumber) {
-            displayString = toString(operate());
+            displayString = operate().toString();
             updateDisplay();
             isNegativeSelected = false;
             isOperatorSelected = false;
+            isJustOperated = true;
             return;
         } else return;
     }
@@ -121,7 +138,11 @@ buttonArea.addEventListener("click", function(event) {
 // display has form: num1 + operator + num2 with spaces between each so split() is useful
 // num1 and num2 may have "-" in front which must be interpreted as a neg number
 function convertDisplayToValues(){
-    return null;
+    let valuesArray = displayString.split(" ");
+    values.num1 = Number(valuesArray[0]);
+    values.operator = valuesArray[1];
+    values.num2 = Number(valuesArray[2]);
+    console.log(values);
 }
 
 
