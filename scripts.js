@@ -30,15 +30,21 @@ let values = {
 // input will be an object of 3 properties (num1, operator, num2)
 function operate(){
     convertDisplayToValues();
+    let result;
     if (values.operator === "+") {
-        return add(values.num1,values.num2);
+        result = add(values.num1,values.num2);
     } else if (values.operator === "-"){
-        return subtract(values.num1,values.num2);
+        result = subtract(values.num1,values.num2);
     } else if (values.operator === "*"){
-        return multiply (values.num1, values.num2);
+        result = multiply (values.num1, values.num2);
     } else if (values.operator === "/") { 
-        return divide (values.num1,values.num2);
+        result = divide (values.num1,values.num2);
     } else return console.log("error in operate function");
+    if (result === "ERROR"){
+        return result;
+    }
+    let roundedResult = Math.round(100*result)/100;
+    return roundedResult;
 }
 
 // need to populate display and store display value
