@@ -17,3 +17,24 @@ function divide(numerator, divisor) {
         return "ERROR";
     } else return numerator/divisor;
 }
+
+// object with 3 variables for display
+let values = {
+    num1:null,
+    operator:null,
+    num2:null,
+};
+
+// operate function takes operator and 2 numbers, then returns result of appropriate math
+// input will be an object of 3 properties (num1, operator, num2)
+// INIT operate function
+    // IF operator value is "+", THEN
+        // RETURN CALL add
+    // ELSE IF operator value is is "-", THEN
+        // RETURN CALL subtract
+    // ELSE IF operator value is "*", THEN
+        // RETURN CALL multiply
+    // ELSE IF operator value is "/", THEN
+        // RETURN CALL divide
+    // ELSE RETURN error log
+// END function
