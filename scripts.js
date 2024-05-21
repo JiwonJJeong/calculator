@@ -78,14 +78,14 @@ buttonArea.addEventListener("click", function(event) {
         return;
     }
     if (event.target.classList.contains("number")) {
-        if (!isJustOperated){
+        if (!isJustOperated || isOperatorSelected){
             displayString = displayString.concat(event.target.innerText);
             updateDisplay();
             isDisplayEndWithNumber = true;
             isJustOperated = false;
             console.log(displayString);
             return;
-        } else{
+        } else {
             displayString = event.target.innerText;
             updateDisplay();
             isDisplayEndWithNumber = true;
@@ -104,7 +104,7 @@ buttonArea.addEventListener("click", function(event) {
             isDisplayEndWithNumber = false;
             isNegativeSelected = false;
             isJustOperated = true;
-            isOperatorSelected = false;
+            isOperatorSelected = true;
             return;
         } 
         // if the display already holds 1 number and an operator
