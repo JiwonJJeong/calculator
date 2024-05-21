@@ -131,6 +131,19 @@ buttonArea.addEventListener("click", function(event) {
             isJustOperated = true;
             return;
         } else return;
+    } else if (event.target.classList.contains("clear")){
+        displayString = "";
+        values = {
+            num1:null,
+            operator:null,
+            num2:null,
+        }
+        updateDisplay();
+        isOperatorSelected = false;
+        isDisplayEndWithNumber = false;
+        isDivisionError = false;
+        isNegativeSelected = false;
+        isJustOperated = false;
     }
 })
 
