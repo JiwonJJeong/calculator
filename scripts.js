@@ -158,8 +158,18 @@ buttonArea.addEventListener("click", function(event) {
             isJustOperated = true;
             return;
         } else return;
+    } else if (event.target.classList.contains("decimal")){
+        if (isDisplayEndWithNumber && !isLatestNumberContainDecimal()){
+            displayString = displayString.concat(".");
+            updateDisplay();
+        } else return;
     }
 })
+
+function isLatestNumberContainDecimal(){
+    let valuesArray = displayString.split(" ");
+    return valuesArray[valuesArray.length-1].includes(".");
+}
 
 // will turn the display string into the values object
 // display has form: num1 + operator + num2 with spaces between each so split() is useful
