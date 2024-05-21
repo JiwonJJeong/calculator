@@ -39,14 +39,13 @@ function operate(){
     } else return console.log("error in operate function");
 }
 
-// INIT operate function
-    // IF operator value is "+", THEN
-        // RETURN CALL add
-    // ELSE IF operator value is is "-", THEN
-        // RETURN CALL subtract
-    // ELSE IF operator value is "*", THEN
-        // RETURN CALL multiply
-    // ELSE IF operator value is "/", THEN
-        // RETURN CALL divide
-    // ELSE RETURN error log
-// END function
+// need to populate display and store display value
+let displayString ="";
+// assign button event listener that will populate displayString then update display
+// since there are so many buttons, use event delegation
+const buttonArea = document.querySelector(".buttons");
+buttonArea.addEventListener("click", function(event) {
+    if (event.target.classList.contains("number")) {
+        console.log(event.target.innerText);
+    }
+})
