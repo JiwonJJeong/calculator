@@ -27,6 +27,18 @@ let values = {
 
 // operate function takes operator and 2 numbers, then returns result of appropriate math
 // input will be an object of 3 properties (num1, operator, num2)
+function operate(){
+    if (values.operator === "+") {
+        return add(values.num1,values.num2);
+    } else if (values.operator === "-"){
+        return subtract(values.num1,values.num2);
+    } else if (values.operator === "*"){
+        return multiply (values.num1, values.num2);
+    } else if (values.operator === "/") { 
+        return divide (values.num1,values.num2);
+    } else return console.log("error in operate function");
+}
+
 // INIT operate function
     // IF operator value is "+", THEN
         // RETURN CALL add
