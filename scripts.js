@@ -107,11 +107,13 @@ buttonArea.addEventListener("click", function(event) {
             console.log("operator button error");
         };
     } else if (event.target.classList.contains("equals")) {
-        // if display holds 2 numbers and an operator
-            // executes operation
+        if (isOperatorSelected && isDisplayEndWithNumber) {
+            displayString = toString(operate());
+            updateDisplay();
             isNegativeSelected = false;
             isOperatorSelected = false;
-        // else does nothing
+            return;
+        } else return;
     }
 })
 
