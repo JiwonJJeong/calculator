@@ -1,2 +1,68 @@
 /* css style sheet */
 
+body {
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container{
+    display:flex;
+    background-color: rgb(197, 197, 197);
+    flex-direction: column;
+    align-items: center;
+    width: 200px;
+    border-radius: 3px;
+    margin-top: 50px;
+}
+
+.display-box {
+    display:flex;
+    justify-content: flex-end;
+    align-items: center;
+    font-size: 25px;
+    width: 168px;
+    height: 50px;
+    background-color: white;
+    border-radius:3px;
+    flex-grow: none;
+    margin: 10px;
+}
+
+.display-text{
+    margin: 3px;
+}
+
+.buttons{
+    display:flex;
+    justify-content: space-around;
+    margin: 10px;
+}
+
+.buttons-right{
+    display:flex;
+    flex-direction: column;
+}
+
+.row {
+    display:flex;
+}
+
+button {
+    height: 40px;
+    width: 40px;
+    font-size: 20px;
+    margin:1px;
+}
+
+.add, .equals {
+    height: 82px;
+}
+
+.equals {
+    background-color: rgb(129, 169, 255);
+}
+
+.zero {
+    width: 82px;
+}
