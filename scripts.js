@@ -42,6 +42,10 @@ function operate(){
 
 // need to populate display and store display value
 let displayString ="";
+let isOperatorSelected = false;
+let isDisplayEndWithNumber = false;
+let isDivisionError = false;
+let isNegativeSelected = false;
 // assign button event listener that will populate displayString then update display
 // since there are so many buttons, use event delegation
 const buttonArea = document.querySelector(".buttons");
@@ -49,22 +53,64 @@ buttonArea.addEventListener("click", function(event) {
     if (event.target.classList.contains("number")) {
         displayString = displayString.concat(event.target.innerText);
         updateDisplay();
+        isDisplayEndWithNumber = true;
         console.log(displayString);
+        return;
     } else if (event.target.classList.contains("operator")) {
         // all operators must be surrounded by spaces for proper conversion from string to values
         // if the display already holds 2 numbers and an operator,
-            // pressing a new operator will execute the first operation, then display result & new operator
+            // then execute first operation, display result & new operator
+        if (isOperatorSelected && isDisplayEndWithNumber) {
+            displayString = toString(operate());
+            displayString = displayString.concat(" ",event.target.innerText," ");
+            updateDisplay();
+            isDisplayEndWithNumber = false;
+            isNegativeSelected = false;
+            return;
+        } 
         // if the display already holds 1 number and an operator
-            // pressing an operator will replace the current operator
+            // if operator button pressed is "-" and existing op isnt "-" or "+", then adds neg sign
+            // otherwise pressing an operator will replace the current operator
+        else if (isOperatorSelected && !isDisplayEndWithNumber) {
+            if (event.target.classList.contains("subtract") &&
+                (displayString.slice(-2,-1) !== "-") &&
+                (displayString.slice(-2,-1) !== "+") &&
+                (!isNegativeSelected ) ){
+                    displayString = displayString.concat("-");
+                    updateDisplay();
+                    isNegativeSelected = true;
+                    return;
+            } else if (!isNegativeSelected) {
+                displayString = displayString.slice (0,-2);
+                displayString = displayString.concat(event.target.innerText," ");
+                updateDisplay();
+                return;
+            } else return;
+        } 
         // if the display has only 1 number
             // pressing an operator will just add the current operator
-        // otherwise, pressing an operator does nothing
-        // "-" works special: if the operator is "-"
-            // "-" can be pressed when nothing is in the display to make the first number neg
-            // "-" can be pressed after another operator to make the second number neg
+        else if (!isOperatorSelected && isDisplayEndWithNumber){
+            displayString = displayString.concat(" ",event.target.innerText," ");
+            updateDisplay();
+            isOperatorSelected = true;
+            isDisplayEndWithNumber = false;
+            return;
+        }
+        // only last case is if there is nothing in display,
+            // only "-" operator will add "-" for neg sign
+        else {
+            if (event.target.classList.contains("subtract") && !isNegativeSelected){
+                displayString = displayString.concat("-");
+                updateDisplay();
+                isNegativeSelected = true;
+                return;
+            }
+        }
     } else if (event.target.classList.contains("equals")) {
         // if display holds 2 numbers and an operator
             // executes operation
+            isNegativeSelected = false;
+            isOperatorSelected = false;
         // else does nothing
     }
 })
