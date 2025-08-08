@@ -1,10 +1,9 @@
 # calculator
 The Odin Project: Foundations project to make calculator using HTML, CSS, JS.
 
-Practiced skills:
-- Navigate GitHub, git, and the command line
-- Create functions with conditionals to handle math operations
-- Use event delegation to get user inputs through buttons with less objects
-- Use strings, array methods, and objects go from displayed inputs to math operations
-- Manipulate DOM elements to display operations and results
-- Write readable code with relevant comments and commit messages
+[Try it here!](https://jiwonjjeong.github.io/calculator/)
+
+## Achieved Learning Goals
+- **String and number manipulation**: Handled common operations and conversion between strings and numbers.
+- **DOM Manipulation**: Created graphical UI by modifying DOM node values and assigning event listeners.
+- **Event delegation**: Minimized event listener objects by leveraging "bubbling-up" property of events.
